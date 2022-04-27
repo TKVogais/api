@@ -26,6 +26,7 @@ const buscarProdutos = async (req, res) => {
     res.json(json)
 }
 const destaques = async (req, res) => {
+    console.log("[API]: Requisição recebida.")
     let json = { results: [] }
     let produtos = await ProdutoService.Destaques();
     for (let i in produtos) {
