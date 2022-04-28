@@ -166,8 +166,9 @@ const atualizarPerfil = async (req, res) => {
         file = RenameFile(req.file, req.body.Usuario)
     } catch (error) {
         res.json({
-            state: 402,
-            message: "Falha ao atualizar o peril!"
+            state: 401,
+            message: "Falha ao atualizar o peril!",
+            error: error
         })
     }
     const {
