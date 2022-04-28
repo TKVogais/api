@@ -161,7 +161,7 @@ const RenameFile = (file, usuario) => {
 const atualizarPerfil = async (req, res) => {
     let AffectedRows
     let file = 'null'
-    if (req.body) {
+    if (req.file) {
         try {
             file = RenameFile(req.file, req.body.Usuario)
         } catch (error) {
