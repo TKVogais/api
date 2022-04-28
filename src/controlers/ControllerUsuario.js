@@ -159,26 +159,29 @@ const RenameFile = (file, usuario) => {
 }
 
 const atualizarPerfil = async (req, res) => {
-    console.log("[API]: Requisição recebida.")
-    console.log("[API]: " + JSON.stringify(req.body))
-    let file = ''
-    try {
-        file = RenameFile(req.file, req.body.Usuario)
-    } catch (error) {
-        res.json({
-            state: 401,
-            message: "Falha ao atualizar o peril!",
-            error: error
-        })
+    let AffectedRows
+    let file = 'null'
+    if (req.body) {
+        try {
+            file = RenameFile(req.file, req.body.Usuario)
+        } catch (error) {
+            res.json({
+                state: 401,
+                message: "Falha ao atualizar o peril!",
+                error: error
+            })
+        }
+        const { Location } = await uploadFile(file)
+        req.body.Path = Location
     }
-    const {
-        Location
-    } = await uploadFile(file)
-    req.body.Path = Location
-    const {
-        affectedRows
-    } = await ServiceUsuario.AtualizarPerfil(req.body)
-    if (affectedRows == 1) {
+    if (file == 'null') {
+        const { affectedRows } = await ServiceUsuario.AtualizarPerfilSemFoto(req.body)
+        AffectedRows = affectedRows
+    } else {
+        const { affectedRows } = await ServiceUsuario.AtualizarPerfilComFoto(req.body)
+        AffectedRows = affectedRows
+    }
+    if (AffectedRows == 1) {
         res.json({
             state: 200,
             message: "Perfil Atualizado com sucesso!"
@@ -190,17 +193,12 @@ const atualizarPerfil = async (req, res) => {
         })
     }
 }
-const atualizarFotoPerfil = async (req, res) => {
-    let file = req.file
-    const response = await uploadFile(file)
-    res.json(response)
-}
+
 module.exports = {
     cadastroUsuario,
     loginUsuario,
     logoutUsuario,
     verificarToken,
     buscarPerfil,
-    atualizarPerfil,
-    atualizarFotoPerfil
+    atualizarPerfil
 }

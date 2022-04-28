@@ -109,7 +109,7 @@ const BuscarPerfil = (idUsuario) => {
         })
     })
 }
-const AtualizarPerfil = (perfil) => {
+const AtualizarPerfilComFoto = (perfil) => {
     const {
         Path,
         Nome,
@@ -161,7 +161,56 @@ const AtualizarPerfil = (perfil) => {
             })
     })
 }
-
+const AtualizarPerfilSemFoto = (perfil) => {
+    const {
+        Nome,
+        Nascimento,
+        Telefone,
+        Cep,
+        Estado,
+        Rua,
+        Complemento,
+        Numero,
+        Cidade,
+        Bairro,
+        Id
+    } = perfil
+    return new Promise((aceito, rejeitado) => {
+        db.query(`UPDATE USUARIOS SET 
+                    NOME = ?,
+                    NASCIMENTO = ?,
+                    TELEFONE = ?,
+                    CEP = ?,
+                    ESTADO = ?,
+                    RUA = ?,
+                    COMPLEMENTO = ?,
+                    NUMERO = ?,
+                    CIDADE = ?,
+                    BAIRRO = ?,
+                    PATH = ?
+                WHERE ID_USUARIO = ?;`,
+            [
+                Nome,
+                Nascimento,
+                Telefone,
+                Cep,
+                Estado,
+                Rua,
+                Complemento,
+                Numero,
+                Cidade,
+                Bairro,
+                Id
+            ],
+            (error, results) => {
+                if (error) {
+                    rejeitado(error);
+                    return;
+                }
+                aceito(results)
+            })
+    })
+}
 
 
 module.exports = {
@@ -173,6 +222,7 @@ module.exports = {
     AtualizarSessao,
     BuscarToken,
     BuscarPerfil,
-    AtualizarPerfil,
+    AtualizarPerfilComFoto,
+    AtualizarPerfilSemFoto,
     BuscarID
 }
