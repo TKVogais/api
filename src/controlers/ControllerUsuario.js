@@ -76,12 +76,12 @@ const loginUsuario = async (req, res) => {
 }
 const gerarToken = (usuario, email) => {
     let token = jwt.sign({
-            usuario: usuario,
-            email: email
-        },
+        usuario: usuario,
+        email: email
+    },
         process.env.NODE_JWT_KEY, {
-            expiresIn: "1h"
-        }
+        expiresIn: "1h"
+    }
     )
     return token
 }
@@ -159,6 +159,8 @@ const RenameFile = (file, usuario) => {
 }
 
 const atualizarPerfil = async (req, res) => {
+    console.log("[API]: Requisição recebida.")
+    console.log("[API]: " + JSON.stringify(req.body))
     let file = ''
     try {
         file = RenameFile(req.file, req.body.Usuario)
