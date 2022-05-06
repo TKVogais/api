@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*")
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
-    app.use(cors)
+    app.use(cors());
     next();
 })
 const PORT = process.env.PORT || 3000;
