@@ -14,7 +14,7 @@ router.post('/login', ControllerUsuario.loginUsuario)
 router.post('/logout', ControllerUsuario.logoutUsuario)
 router.post('/token', ControllerUsuario.verificarToken)
 router.post('/perfil', ControllerUsuario.buscarPerfil)
-router.post('/up-perfil', upload.single('image'), ControllerUsuario.atualizarPerfil)
+router.post('/up-perfil', ControllerUsuario.atualizarPerfil)
 
 //Exportação das Rotas
 

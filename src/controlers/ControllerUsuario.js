@@ -140,41 +140,11 @@ const buscarPerfil = async (req, res) => {
     res.json(json)
 }
 
-const RenameFile = (file, usuario) => {
-    let filename = ''
-    switch (file.mimetype) {
-        case 'image/jpeg':
-            filename = usuario + ".jpeg"
-            break;
-        case 'image/png':
-            filename = usuario + ".png"
-            break;
-        case 'image/jpg':
-            filename = usuario + ".jpg"
-            break;
-    }
-    file.filename = filename
-    file.originalname = filename
-    return file
-}
+
 
 const atualizarPerfil = async (req, res) => {
-    let AffectedRows
-    let file = 'null'
-    if (req.file) {
-        try {
-            file = RenameFile(req.file, req.body.Usuario)
-        } catch (error) {
-            res.json({
-                state: 401,
-                message: "Falha ao atualizar o peril!",
-                error: error
-            })
-        }
-        const { Location } = await uploadFile(file)
-        req.body.Path = Location
-    }
-    if (file == 'null') {
+    let AffectedRows = 0
+    if (req.body.Path == "") {
         const { affectedRows } = await ServiceUsuario.AtualizarPerfilSemFoto(req.body)
         AffectedRows = affectedRows
     } else {
