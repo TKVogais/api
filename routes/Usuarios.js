@@ -16,10 +16,7 @@ router.post('/token', ControllerUsuario.verificarToken)
 router.post('/perfil', ControllerUsuario.buscarPerfil)
 router.post('/up-perfil', ControllerUsuario.atualizarPerfil)
 router.post('/atualizar', (req, res) => {
-    res.status(200).json({
-        state: 200,
-        message: "Acesso CORS"
-    })
+    res.status(200).json(req.body)
 })
 
 //Exportação das Rotas
