@@ -143,19 +143,23 @@ const buscarPerfil = async (req, res) => {
 
 
 const atualizarPerfil = async (req, res) => {
-    console.log("[API]: Executei")
+    let AffectedRows = 0
     if (req.body.Path == "") {
-        const response = await ServiceUsuario.AtualizarPerfilSemFoto(req.body)
-        console.log(response)
+        const { affectedRows } = await ServiceUsuario.AtualizarPerfilSemFoto(req.body)
+        AffectedRows = affectedRows
     } else {
-        const response = await ServiceUsuario.AtualizarPerfilComFoto(req.body)
-        console.log(response)
+        const { affectedRows } = await ServiceUsuario.AtualizarPerfilComFoto(req.body)
+        AffectedRows = affectedRows
     }
-
-    res.json({
-        state: 200,
-        message: "Perfil Atualizado com sucesso!"
-    })
+    if (AffectedRows == 1) {
+        res.json({
+            state: 200
+        })
+    } else {
+        res.json({
+            state: 407
+        })
+    }
 }
 
 module.exports = {
