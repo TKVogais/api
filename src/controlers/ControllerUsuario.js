@@ -143,6 +143,7 @@ const buscarPerfil = async (req, res) => {
 
 
 const atualizarPerfil = async (req, res) => {
+    console.log("[API]: Executei")
     let AffectedRows = 0
     if (req.body.Path == "") {
         const { affectedRows } = await ServiceUsuario.AtualizarPerfilSemFoto(req.body)
@@ -152,6 +153,7 @@ const atualizarPerfil = async (req, res) => {
         AffectedRows = affectedRows
     }
     if (AffectedRows == 1) {
+        console.log("[API]: Executei")
         res.json({
             state: 200,
             message: "Perfil Atualizado com sucesso!"
