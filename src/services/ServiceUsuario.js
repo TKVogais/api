@@ -137,7 +137,7 @@ const AtualizarPerfilComFoto = (perfil) => {
                     CIDADE = ?,
                     BAIRRO = ?,
                     PATH = ?
-                WHERE ID_USUARIO = ?;`,
+                WHERE ID_USUARIO = ?`,
             [
                 Nome,
                 Nascimento,
@@ -178,7 +178,7 @@ const AtualizarPerfilSemFoto = (perfil) => {
     return new Promise((aceito, rejeitado) => {
         db.query(`UPDATE USUARIOS SET 
                     NOME = ?,
-                    NASCIMENTO = ?,
+                    NASCIMENTO = ?, 
                     TELEFONE = ?,
                     CEP = ?,
                     ESTADO = ?,
@@ -186,9 +186,8 @@ const AtualizarPerfilSemFoto = (perfil) => {
                     COMPLEMENTO = ?,
                     NUMERO = ?,
                     CIDADE = ?,
-                    BAIRRO = ?,
-                    PATH = ?
-                WHERE ID_USUARIO = ?;`,
+                    BAIRRO = ?
+                WHERE ID_USUARIO = ?`,
             [
                 Nome,
                 Nascimento,
