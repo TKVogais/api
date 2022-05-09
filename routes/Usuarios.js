@@ -15,6 +15,12 @@ router.post('/logout', ControllerUsuario.logoutUsuario)
 router.post('/token', ControllerUsuario.verificarToken)
 router.post('/perfil', ControllerUsuario.buscarPerfil)
 router.post('/up-perfil', ControllerUsuario.atualizarPerfil)
+router.post('/atualizar', (req, res) => {
+    res.status(200).json({
+        state: 200,
+        message: "Acesso CORS"
+    })
+})
 
 //Exportação das Rotas
 
