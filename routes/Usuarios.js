@@ -14,10 +14,7 @@ router.post('/login', ControllerUsuario.loginUsuario)
 router.post('/logout', ControllerUsuario.logoutUsuario)
 router.post('/token', ControllerUsuario.verificarToken)
 router.post('/perfil', ControllerUsuario.buscarPerfil)
-router.post('/up-perfil', ControllerUsuario.atualizarPerfil)
-router.post('/atualizar', (req, res) => {
-    res.status(200).json(req.body)
-})
+router.post('/atualizar', ControllerUsuario.atualizarPerfil)
 
 //Exportação das Rotas
 
