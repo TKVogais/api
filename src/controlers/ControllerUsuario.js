@@ -122,6 +122,7 @@ const NotNull = (data) => {
 const buscarPerfil = async (req, res) => {
     let json = {}
     const [response] = await ServiceUsuario.BuscarPerfil(req.body.id)
+    console.log(response)
     json = {
         Email: response.EMAIL,
         Nome: response.NOME,
