@@ -1,9 +1,5 @@
 const ProdutoService = require('../services/ServiceProduto')
-
-const StringToArray = (str) => {
-    let sizes = ["M", "G"];
-    return sizes;
-}
+const { StringToArray } = require('../services/ServiceAux')
 const BitToBoolean = (bit) => {
     switch (bit) {
         case 0: return false
